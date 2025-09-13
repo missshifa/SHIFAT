@@ -1,15 +1,21 @@
-const fs = require("fs-extra");
-const axios = require("axios");
-
+const dipto = require('axios');
+const fs = require('fs-extra');
+const path = require('path');
+const moment = require('moment-timezone');
+const pathFile = __dirname + '/cache/d1pt0.txt';
+if (!fs.existsSync(pathFile))
+  fs.writeFileSync(pathFile, 'true');
+  const isEnable = fs.readFileSync(pathFile, 'utf-8');
 module.exports.config = {
-    name: ",",
-    version: "1.0.0",
-    hasPermssion: 0,
-    credits: "𝗦𝗛𝗜𝗙𝗔𝗧",
-    description: "Send random welcome message with random image",
-    commandCategory: "system",
-    usages: "intro",
-    cooldowns: 3,
+  name: ",",
+  version: "1.0.0",
+  permission: 2,
+  credits: "──꯭─⃝‌‌𝗦𝗜𝗙𝗨 𝗕𝗢𝗧───",
+  prefix:true,
+  description: "when send ,prefix then response",
+  category: "bot prefix",
+  usages: ",",
+  cooldowns: 5,
 };
 
 module.exports.run = async function ({ api, event }) {
@@ -26,11 +32,7 @@ module.exports.run = async function ({ api, event }) {
 
     // 🖼️ Random image list
     const images = [
-        "https://i.imgur.com/UMtQhVe.jpg",
-        "https://i.imgur.com/t8F1dKs.jpg",
-        "https://i.imgur.com/4ZQZ8Mn.jpg",
-        "https://i.imgur.com/LfM9k1u.jpg",
-        "https://i.imgur.com/Y8fF0jF.jpg"
+        "https://i.imgur.com/K2Rgmw6.jpeg"
     ];
 
     const imgURL = images[Math.floor(Math.random() * images.length)];
