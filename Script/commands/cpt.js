@@ -2,19 +2,19 @@ const fs = require("fs-extra");
 const axios = require("axios");
 
 module.exports.config = {
-    name: ",",
-    version: "1.0.1", // version updated
+    name: "noprefix", // Renamed for clarity, not essential
+    version: "1.0.2",
     hasPermssion: 0,
-    credits: "𝗦𝗛𝗜𝗙𝗔𝗧 (Converted by D-Jukie)", // credits updated for conversion
+    credits: "𝗦𝗛𝗜𝗙𝗔𝗧 (Converted by D-Jukie)",
     description: "Send random welcome message when prefix is used alone",
-    commandCategory: "system",
+    commandCategory: "noprefix", // Changed category for clarity
     usages: "Just type ,",
-    cooldowns: 3,
+    cooldowns: 5,
+    nodemodule: true // ✅ This is the main solution
 };
 
-// This function will now handle all incoming messages
 module.exports.handleEvent = async function ({ api, event }) {
-    // Check if the message body is exactly ","
+    // We check if the message body is exactly ","
     if (event.body && event.body.toLowerCase() === ",") {
         const { threadID, messageID } = event;
 
@@ -56,11 +56,10 @@ module.exports.handleEvent = async function ({ api, event }) {
             );
         } catch (err) {
             console.error("❌ Image download failed:", err);
-            // If image download fails, just send the text message
             api.sendMessage(msg, threadID, messageID);
         }
     }
 };
 
-// This run function is kept empty to avoid errors with some command loaders
+// No run function is needed when using nodemodule for handleEvent
 module.exports.run = async function({ api, event }) {};
